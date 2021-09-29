@@ -1,0 +1,14 @@
+##########################
+# Custom added
+.vscode
+.mypy_cache
+.DS_Store
+__pycache__
+*.feather
+.eggs
+*.egg-info
+build
+dist
+*.csv
+# data
+.venv
