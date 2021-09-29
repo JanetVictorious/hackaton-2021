@@ -1,0 +1,16 @@
+columns:
+  is_mtu_decision:
+    dtype : bool
+    type: feature
+
+  order_total:
+    dtype: float64
+    type: feature
+
+  decision_date:
+    dtype: datetime64[ns]
+    type: feature
+
+  decision:
+    dtype: category
+    type: target
