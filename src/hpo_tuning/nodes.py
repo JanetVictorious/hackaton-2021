@@ -10,7 +10,7 @@ from src.utils.bayes_opt_helpers import clf_log_loss
 
 
 def optimize_params(
-    data_path: str,
+    input_path: str,
     output_path: str,
     params_path: str = None,
     hpo_space_name: str = None,
@@ -59,8 +59,8 @@ def optimize_params(
     print((f'HPO space: {hpo_space}'))
 
     # Read data
-    train_df = pd.read_feather(f'{feature_selection_dir}/pp_train_data.feather')
-    val_df = pd.read_feather(f'{feature_selection_dir}/pp_val_data.feather')
+    train_df = pd.read_feather(os.path.join(input_path, 'train_data.feather'))
+    val_df = pd.read_feather(os.path.join(input_path, 'train_data.feather'))
 
     print(f'Shape of training data: {train_df.shape}')
     print(f'Shape of validation data: {val_df.shape}')
