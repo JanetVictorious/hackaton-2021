@@ -2,7 +2,12 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List
 
-from sklearn.metrics import log_loss
+from sklearn.metrics import (
+    f1_score,
+    log_loss,
+    accuracy_score,
+    confusion_matrix,
+)
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -41,6 +46,9 @@ def clf_log_loss(
     # Predictions on test data
     y_pred = model.predict(X_val)
 
+    print(f'Accuracy: {accuracy_score(y_val, y_pred)}')
+    print(f'F1 score: {f1_score(y_val, y_pred)}')
+
     # Mean-absolute-error from predictions
     score = log_loss(y_val, y_pred)
 
@@ -75,6 +83,10 @@ def lr_log_loss(
     lr.fit(x_train, y_train)
 
     y_prob = lr.predict_proba(x_val)
+    y_pred = lr.predict(x_val)
+
+    print(f'Accuracy: {accuracy_score(y_val, y_pred)}')
+    print(f"F1 score: {f1_score(y_val, y_pred, average='micro')}")
 
     ll = log_loss(y_val, y_pred=y_prob)
 
