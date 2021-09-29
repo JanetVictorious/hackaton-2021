@@ -4,26 +4,106 @@
 #
 #    pip-compile requirements.in
 #
+appnope==0.1.2
+    # via
+    #   ipykernel
+    #   ipython
+argcomplete==1.12.3
+    # via ipykernel
+argon2-cffi==21.1.0
+    # via notebook
+attrs==21.2.0
+    # via jsonschema
+backcall==0.2.0
+    # via ipython
 bayesian-optimization==1.2.0
     # via -r requirements.in
+bleach==4.1.0
+    # via nbconvert
 catboost==0.26
     # via -r requirements.in
+cffi==1.14.6
+    # via argon2-cffi
 cycler==0.10.0
     # via matplotlib
+debugpy==1.4.3
+    # via ipykernel
+decorator==5.1.0
+    # via ipython
+defusedxml==0.7.1
+    # via nbconvert
 dill==0.3.3
     # via -r requirements.in
+entrypoints==0.3
+    # via
+    #   jupyter-client
+    #   nbconvert
 flake8==3.9.2
     # via -r requirements.in
 graphviz==0.17
     # via catboost
 importlib-metadata==4.8.1
-    # via flake8
+    # via
+    #   argcomplete
+    #   flake8
+    #   ipykernel
+    #   jsonschema
 importlib-resources==5.2.2
     # via sweetviz
+ipykernel==6.4.1
+    # via
+    #   ipywidgets
+    #   jupyter
+    #   jupyter-console
+    #   notebook
+    #   qtconsole
+ipython==7.28.0
+    # via
+    #   ipykernel
+    #   ipywidgets
+    #   jupyter-console
+ipython-genutils==0.2.0
+    # via
+    #   ipykernel
+    #   ipywidgets
+    #   nbformat
+    #   notebook
+    #   qtconsole
+ipywidgets==7.6.5
+    # via jupyter
+jedi==0.18.0
+    # via ipython
 jinja2==3.0.1
-    # via sweetviz
+    # via
+    #   nbconvert
+    #   notebook
+    #   sweetviz
 joblib==1.0.1
     # via scikit-learn
+jsonschema==3.2.0
+    # via nbformat
+jupyter==1.0.0
+    # via -r requirements.in
+jupyter-client==7.0.4
+    # via
+    #   ipykernel
+    #   jupyter-console
+    #   nbclient
+    #   notebook
+    #   qtconsole
+jupyter-console==6.4.0
+    # via jupyter
+jupyter-core==4.8.1
+    # via
+    #   jupyter-client
+    #   nbconvert
+    #   nbformat
+    #   notebook
+    #   qtconsole
+jupyterlab-pygments==0.1.2
+    # via nbconvert
+jupyterlab-widgets==1.0.2
+    # via ipywidgets
 kiwisolver==1.3.2
     # via matplotlib
 markupsafe==2.0.1
@@ -34,8 +114,34 @@ matplotlib==3.2.0
     #   catboost
     #   seaborn
     #   sweetviz
+matplotlib-inline==0.1.3
+    # via
+    #   ipykernel
+    #   ipython
 mccabe==0.6.1
     # via flake8
+mistune==0.8.4
+    # via nbconvert
+nbclient==0.5.4
+    # via nbconvert
+nbconvert==6.2.0
+    # via
+    #   jupyter
+    #   notebook
+nbformat==5.1.3
+    # via
+    #   ipywidgets
+    #   nbclient
+    #   nbconvert
+    #   notebook
+nest-asyncio==1.5.1
+    # via
+    #   jupyter-client
+    #   nbclient
+notebook==6.4.4
+    # via
+    #   jupyter
+    #   widgetsnbextension
 numpy==1.19.1
     # via
     #   -r requirements.in
@@ -49,30 +155,73 @@ numpy==1.19.1
     #   seaborn
     #   sweetviz
     #   xgboost
+packaging==21.0
+    # via bleach
 pandas==1.2.4
     # via
     #   -r requirements.in
     #   catboost
     #   seaborn
     #   sweetviz
+pandocfilters==1.5.0
+    # via nbconvert
+parso==0.8.2
+    # via jedi
+pexpect==4.8.0
+    # via ipython
+pickleshare==0.7.5
+    # via ipython
 plotly==5.3.1
     # via catboost
+prometheus-client==0.11.0
+    # via notebook
+prompt-toolkit==3.0.20
+    # via
+    #   ipython
+    #   jupyter-console
+ptyprocess==0.7.0
+    # via
+    #   pexpect
+    #   terminado
 pyarrow==5.0.0
     # via -r requirements.in
 pycodestyle==2.7.0
     # via flake8
+pycparser==2.20
+    # via cffi
 pyflakes==2.3.1
     # via flake8
+pygments==2.10.0
+    # via
+    #   ipython
+    #   jupyter-console
+    #   jupyterlab-pygments
+    #   nbconvert
+    #   qtconsole
 pyparsing==2.4.7
-    # via matplotlib
+    # via
+    #   matplotlib
+    #   packaging
+pyrsistent==0.18.0
+    # via jsonschema
 python-dateutil==2.8.2
     # via
+    #   jupyter-client
     #   matplotlib
     #   pandas
 pytz==2021.1
     # via pandas
 pyyaml==5.4.1
     # via -r requirements.in
+pyzmq==22.3.0
+    # via
+    #   jupyter-client
+    #   notebook
+    #   qtconsole
+qtconsole==5.1.1
+    # via jupyter
+qtpy==1.11.2
+    # via qtconsole
 ruamel.yaml==0.17.16
     # via -r requirements.in
 ruamel.yaml.clib==0.2.6
@@ -92,10 +241,14 @@ scipy==1.5.2
     #   xgboost
 seaborn==0.11.0
     # via -r requirements.in
+send2trash==1.8.0
+    # via notebook
 six==1.16.0
     # via
+    #   bleach
     #   catboost
     #   cycler
+    #   jsonschema
     #   plotly
     #   python-dateutil
 sweetviz==2.1.3
@@ -104,15 +257,47 @@ tabulate==0.8.9
     # via -r requirements.in
 tenacity==8.0.1
     # via plotly
+terminado==0.12.1
+    # via notebook
+testpath==0.5.0
+    # via nbconvert
 threadpoolctl==2.2.0
     # via scikit-learn
+tornado==6.1
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   notebook
+    #   terminado
 tqdm==4.62.3
     # via sweetviz
+traitlets==5.1.0
+    # via
+    #   ipykernel
+    #   ipython
+    #   ipywidgets
+    #   jupyter-client
+    #   jupyter-core
+    #   matplotlib-inline
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+    #   notebook
+    #   qtconsole
 typing-extensions==3.10.0.2
     # via importlib-metadata
+wcwidth==0.2.5
+    # via prompt-toolkit
+webencodings==0.5.1
+    # via bleach
+widgetsnbextension==3.5.1
+    # via ipywidgets
 xgboost==1.4.2
     # via -r requirements.in
 zipp==3.5.1
     # via
     #   importlib-metadata
     #   importlib-resources
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
