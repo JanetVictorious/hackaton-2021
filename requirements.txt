@@ -40,6 +40,8 @@ entrypoints==0.3
     #   nbconvert
 flake8==3.9.2
     # via -r requirements.in
+gensim==4.1.2
+    # via -r requirements.in
 importlib-metadata==4.8.1
     # via
     #   argcomplete
@@ -148,6 +150,7 @@ numpy==1.19.1
     # via
     #   -r requirements.in
     #   bayesian-optimization
+    #   gensim
     #   matplotlib
     #   pandas
     #   pyarrow
@@ -234,6 +237,7 @@ scipy==1.5.2
     # via
     #   -r requirements.in
     #   bayesian-optimization
+    #   gensim
     #   scikit-learn
     #   seaborn
     #   sweetviz
@@ -248,6 +252,8 @@ six==1.16.0
     #   cycler
     #   jsonschema
     #   python-dateutil
+smart-open==5.2.1
+    # via gensim
 sweetviz==2.1.3
     # via -r requirements.in
 tabulate==0.8.9

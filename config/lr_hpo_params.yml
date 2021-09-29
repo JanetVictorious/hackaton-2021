@@ -1,0 +1,4 @@
+max_df: [0.5, 1.0]
+min_df: [5, 15]
+ngrams: [1, 3]
+alpha_inv: [1e-4, 100.0]
