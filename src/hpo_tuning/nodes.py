@@ -15,36 +15,7 @@ def optimize_params(
     params_path: str = None,
     hpo_space_name: str = None,
 ) -> None:
-    """Apply Bayesian Optimization to regressor parameters.
-
-    :param str output_dir:
-        Output save path.
-    :param str metadata_file:
-        Metadata file path.
-    :param str train_data_feather_path:
-        Training data feather path.
-    :param str test_data_feather_path:
-        Test data feather path.
-    :param str hyperparameter_fname:
-        NOT USED...
-    :param str experiment_path:
-        Experiment path.
-    :param str experiment_name:
-        Experiment filename.
-    :param str hpo_space_name:
-        HPO space filename.
-
-    :returns:
-        Json with optimized hyper-parameters.
-        :param test_data_feather_path:
-        :param output_save_path:
-        :param metadata_file:
-        :param train_data_feather_path:
-        :param hpo_space_name:
-        :param experiment_name:
-        :param experiment_path:
-        :param feature_selection_path:
-        :param val_data_feather_path:
+    """Some text...
     """
     # Create yaml object
     yaml = YAML()
@@ -147,36 +118,7 @@ def optimize_lr_params(
     params_path: str = None,
     hpo_space_name: str = None,
 ) -> None:
-    """Apply Bayesian Optimization to regressor parameters.
-
-    :param str output_dir:
-        Output save path.
-    :param str metadata_file:
-        Metadata file path.
-    :param str train_data_feather_path:
-        Training data feather path.
-    :param str test_data_feather_path:
-        Test data feather path.
-    :param str hyperparameter_fname:
-        NOT USED...
-    :param str experiment_path:
-        Experiment path.
-    :param str experiment_name:
-        Experiment filename.
-    :param str hpo_space_name:
-        HPO space filename.
-
-    :returns:
-        Json with optimized hyper-parameters.
-        :param test_data_feather_path:
-        :param output_save_path:
-        :param metadata_file:
-        :param train_data_feather_path:
-        :param hpo_space_name:
-        :param experiment_name:
-        :param experiment_path:
-        :param feature_selection_path:
-        :param val_data_feather_path:
+    """Some text...
     """
     # Create yaml object
     yaml = YAML()

@@ -23,20 +23,21 @@ def apply_inference(
     vectorizer, model = joblib.load(f'{input_path}/training_output.pkl')
 
     # Read data
-    inf_df = pd.read_csv(os.path.join(output_path, 'test_dataset.csv'))
+    inf_df = pd.read_csv(os.path.join(output_path, 'OOS_dataset.csv'))
+
+    inf_df = inf_df[['item']]
 
     # Make copy
     X = inf_df.copy()
 
     # Apply feature engineering
-    # Feature engineering
     X = feature_engineer(X)
 
     # Process text
     X['item_processed'] = X['item'].map(process_text)
 
-    stemmer = PorterStemmer()
-    X["item_processed"] = stemmer.stem_documents(X.item_processed.values)
+    # stemmer = PorterStemmer()
+    # X["item_processed"] = stemmer.stem_documents(X.item_processed.values)
 
     # Apply vectorizer
     X_tfidf = vectorizer.transform(X.item_processed.values).todense()

@@ -41,6 +41,7 @@ def lr_model(
     print(f'Optimal parameters: {hpo_params}')
 
     print('Create vectorizer...')
+
     # Create vectorizer
     tfidf_vectorizer = TfidfVectorizer(
         max_df=hpo_params['max_df'],
@@ -52,9 +53,6 @@ def lr_model(
     X_tfidf = tfidf_vectorizer.fit_transform(X.item_processed.values)
     X_tfidf = X_tfidf.todense()
 
-    # X_tfidf_val = tfidf_vectorizer.transform(x_val.item_processed.values).todense()
-
-    # x_val = np.concatenate([X_tfidf_val, x_val[FEATURES].values.astype(float)], axis=1)
     X_combined = np.concatenate([X_tfidf, X[FEATURES].values.astype(float)], axis=1)
 
     print('Train model...')

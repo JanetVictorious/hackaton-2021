@@ -103,16 +103,16 @@ def _parse_args():
 if __name__ == '__main__':
     PARSER = _parse_args()
 
-    # feature_engineer_data(
-    #     input_path=PARSER.fe_input_path,
-    #     output_path=PARSER.fe_output_path,
-    #     params_path=PARSER.params_path,
-    # )
+    feature_engineer_data(
+        input_path=PARSER.fe_input_path,
+        output_path=PARSER.fe_output_path,
+        params_path=PARSER.params_path,
+    )
 
-    # split_data(
-    #     input_path=PARSER.fe_output_path,
-    #     output_path=PARSER.split_output_path,
-    # )
+    split_data(
+        input_path=PARSER.fe_output_path,
+        output_path=PARSER.split_output_path,
+    )
 
     # optimize_params(
     #     input_path=PARSER.split_output_path,
@@ -121,18 +121,18 @@ if __name__ == '__main__':
     #     hpo_space_name=PARSER.hpo_space,
     # )
 
-    # optimize_lr_params(
-    #     input_path=PARSER.split_output_path,
-    #     output_path=PARSER.hpo_output_path,
-    #     params_path=PARSER.params_path,
-    #     hpo_space_name=PARSER.lr_hpo_space,
-    # )
+    optimize_lr_params(
+        input_path=PARSER.split_output_path,
+        output_path=PARSER.hpo_output_path,
+        params_path=PARSER.params_path,
+        hpo_space_name=PARSER.lr_hpo_space,
+    )
 
-    # lr_model(
-    #     input_path=PARSER.split_output_path,
-    #     output_path=PARSER.lr_model_output_path,
-    #     params_path=PARSER.hpo_output_path,
-    # )
+    lr_model(
+        input_path=PARSER.split_output_path,
+        output_path=PARSER.lr_model_output_path,
+        params_path=PARSER.hpo_output_path,
+    )
 
     apply_inference(
         input_path=PARSER.lr_model_output_path,
