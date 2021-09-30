@@ -2,7 +2,7 @@ import argparse
 
 from src.feature_engineering.nodes import feature_engineer_data
 from src.apply_split.nodes import split_data
-from src.hpo_tuning.nodes import optimize_params, optimize_lr_params
+from src.hpo_tuning.nodes import xgb_optimize_params, optimize_lr_params
 from src.model_training.nodes import lr_model
 from src.inference.nodes import apply_inference
 
@@ -103,38 +103,58 @@ def _parse_args():
 if __name__ == '__main__':
     PARSER = _parse_args()
 
-    feature_engineer_data(
-        input_path=PARSER.fe_input_path,
-        output_path=PARSER.fe_output_path,
-        params_path=PARSER.params_path,
-    )
+    # #
+    # # Feature engineering
+    # #
 
-    split_data(
-        input_path=PARSER.fe_output_path,
-        output_path=PARSER.split_output_path,
-    )
-
-    # optimize_params(
-    #     input_path=PARSER.split_output_path,
-    #     output_path=PARSER.hpo_output_path,
+    # feature_engineer_data(
+    #     input_path=PARSER.fe_input_path,
+    #     output_path=PARSER.fe_output_path,
     #     params_path=PARSER.params_path,
-    #     hpo_space_name=PARSER.hpo_space,
     # )
 
-    optimize_lr_params(
+    # #
+    # # Split
+    # #
+
+    # split_data(
+    #     input_path=PARSER.fe_output_path,
+    #     output_path=PARSER.split_output_path,
+    # )
+
+    #
+    # HPO tuning
+    #
+
+    xgb_optimize_params(
         input_path=PARSER.split_output_path,
         output_path=PARSER.hpo_output_path,
         params_path=PARSER.params_path,
-        hpo_space_name=PARSER.lr_hpo_space,
+        hpo_space_name=PARSER.hpo_space,
     )
 
-    lr_model(
-        input_path=PARSER.split_output_path,
-        output_path=PARSER.lr_model_output_path,
-        params_path=PARSER.hpo_output_path,
-    )
+    # optimize_lr_params(
+    #     input_path=PARSER.split_output_path,
+    #     output_path=PARSER.hpo_output_path,
+    #     params_path=PARSER.params_path,
+    #     hpo_space_name=PARSER.lr_hpo_space,
+    # )
 
-    apply_inference(
-        input_path=PARSER.lr_model_output_path,
-        output_path=PARSER.inf_output_path,
-    )
+    # #
+    # # Model training
+    # #
+
+    # lr_model(
+    #     input_path=PARSER.split_output_path,
+    #     output_path=PARSER.lr_model_output_path,
+    #     params_path=PARSER.hpo_output_path,
+    # )
+
+    # #
+    # # Inference
+    # #
+
+    # apply_inference(
+    #     input_path=PARSER.lr_model_output_path,
+    #     output_path=PARSER.inf_output_path,
+    # )

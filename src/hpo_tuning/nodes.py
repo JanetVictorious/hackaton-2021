@@ -6,10 +6,10 @@ from ruamel.yaml import YAML
 
 from bayes_opt import BayesianOptimization
 
-from src.utils.bayes_opt_helpers import clf_log_loss, lr_log_loss
+from src.utils.bayes_opt_helpers import xgb_log_loss, lr_log_loss
 
 
-def optimize_params(
+def xgb_optimize_params(
     input_path: str,
     output_path: str,
     params_path: str = None,
@@ -25,7 +25,7 @@ def optimize_params(
 
     # Open hpo_space.yml as hpo_space
     with open(hpo_path, 'r') as infile:
-        hpo_space = yaml.load(infile)
+        hpo_space = dict(yaml.load(infile))
 
     print((f'HPO space: {hpo_space}'))
 
@@ -40,12 +40,9 @@ def optimize_params(
     target_name = 'category'
     print(f'Target name: {target_name}')
 
-    # Columns to drop
-    col_to_drop = ['item', 'item_processed', 'category']
-
     # Separate features and target
-    x_train, y_train = train_df.drop(columns=col_to_drop), train_df[target_name]
-    x_val, y_val = val_df.drop(columns=col_to_drop), val_df[target_name]
+    x_train, y_train = train_df.drop(columns=[target_name]), train_df[target_name]
+    x_val, y_val = val_df.drop(columns=[target_name]), val_df[target_name]
 
     print(f'X_train shape: {x_train.shape}')
     print(f'y_train shape: {y_train.shape}')
@@ -65,7 +62,10 @@ def optimize_params(
                        min_child_weight,
                        reg_alpha,
                        reg_lambda,
-                       gamma):
+                       gamma,
+                       max_df,
+                       min_df,
+                       ngrams):
         """Wrapper of XGBClassifier logloss"""
         model_params = {
             'colsample_bytree': colsample_bytree,
@@ -80,8 +80,11 @@ def optimize_params(
             'reg_lambda': reg_lambda,
             'gamma': gamma,
         }
-        return clf_log_loss(
+        return xgb_log_loss(
             model_params=model_params,
+            max_df=float(max_df),
+            min_df=int(min_df),
+            ngrams=int(ngrams),
             X_train=x_train,
             y_train=y_train,
             X_val=x_val,
@@ -104,11 +107,13 @@ def optimize_params(
     # Cast int parameters from float to int
     opt_params['max_depth'] = int(round(opt_params['max_depth']))
     opt_params['n_estimators'] = int(round(opt_params['n_estimators']))
+    opt_params['min_df'] = int(round(opt_params['min_df']))
+    opt_params['ngrams'] = int(round(opt_params['ngrams']))
 
     print(f'Optimal parameters: {opt_params}')
 
     # Export optimal hyper-parameters
-    with open(os.path.join(output_path, f'hyperparameters.json'), 'w') as outfile:
+    with open(os.path.join(output_path, 'xgb_hyperparameters.json'), 'w') as outfile:
         json.dump(opt_params, outfile)
 
 
@@ -128,7 +133,7 @@ def optimize_lr_params(
 
     # Open hpo_space.yml as hpo_space
     with open(hpo_path, 'r') as infile:
-        hpo_space = yaml.load(infile)
+        hpo_space = dict(yaml.load(infile))
 
     print((f'HPO space: {hpo_space}'))
 

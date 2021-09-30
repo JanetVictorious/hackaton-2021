@@ -18,8 +18,11 @@ FEATURES = ['count_sizes', 'special_char_count', 'number_count', 'fraction_upper
             'has_french_combinations']
 
 
-def clf_log_loss(
+def xgb_log_loss(
     model_params: Dict,
+    max_df: float,
+    min_df: int,
+    ngrams: int,
     X_train: pd.DataFrame,
     y_train: pd.Series,
     X_val: pd.DataFrame,
@@ -28,6 +31,21 @@ def clf_log_loss(
 ) -> float:
     """Some text...
     """
+    # Create vectorizer
+    tfidf_vectorizer = TfidfVectorizer(max_df=max_df,
+                                       min_df=min_df,
+                                       strip_accents='ascii',
+                                       max_features=10000,
+                                       ngram_range=(1, ngrams))
+
+    X_tfidf_train = tfidf_vectorizer.fit_transform(X_train.item_processed.values)
+    X_tfidf_train = X_tfidf_train.todense()
+
+    X_tfidf_val = tfidf_vectorizer.transform(X_val.item_processed.values).todense()
+
+    x_train = np.concatenate([X_tfidf_train, X_train[FEATURES].values.astype(float)], axis=1)
+    x_val = np.concatenate([X_tfidf_val, X_val[FEATURES].values.astype(float)], axis=1)
+
     # Create model object
     model = XGBClassifier(
         **model_params,
@@ -38,16 +56,16 @@ def clf_log_loss(
 
     # Fit model
     model.fit(
-        X_train, y_train,
-        eval_set=[(X_train, y_train), (X_val, y_val)],
-        eval_metric='logloss',
+        x_train, y_train,
+        eval_set=[(x_train, y_train), (x_val, y_val)],
+        eval_metric='mlogloss',
     )
 
     # Predictions on test data
-    y_pred = model.predict(X_val)
+    y_pred = model.predict_proba(x_val)
 
-    print(f'Accuracy: {accuracy_score(y_val, y_pred)}')
-    print(f'F1 score: {f1_score(y_val, y_pred)}')
+    # print(f'Accuracy: {accuracy_score(y_val, y_pred)}')
+    # print(f'F1 score: {f1_score(y_val, y_pred)}')
 
     # Mean-absolute-error from predictions
     score = log_loss(y_val, y_pred)
